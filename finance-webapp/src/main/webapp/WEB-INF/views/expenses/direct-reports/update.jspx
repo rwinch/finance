@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_expenses_domain_Expense" modelAttribute="expense" path="/expenses/direct-reports" versionField="Version" z="wQ/QRHSj1VhAaTY+2IR/lfQGiHM=">
+        <field:input field="description" id="c_expenses_domain_Expense_description" min="3" required="true" z="dDQWYV8ClOUHl4PYhSCxO64z7yo="/>
+        <field:datetime dateTimePattern="${expense_expensedate_date_format}" field="expenseDate" id="c_expenses_domain_Expense_expenseDate" required="true" z="3VM6aBUP9HG/d+69rixJS674YwE="/>
+        <field:input field="ammount" id="c_expenses_domain_Expense_ammount" min="0" required="true" z="CHAepwIj/9EKqLEcwYHlNCEbr6E="/>
+        <field:select field="reporter" id="c_expenses_domain_Expense_reporter" itemValue="id" items="${employees}" path="/employees" z="Ur7CVlAnjTwck5ZiuabB2Ll4Q7M="/>
+        <field:checkbox field="approved" id="c_expenses_domain_Expense_approved" z="9HSYHQ/abtfzlVU+rJfbX/TQDNY="/>
+    </form:update>
+</div>

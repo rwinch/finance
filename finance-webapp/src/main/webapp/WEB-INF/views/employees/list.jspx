@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_expenses_domain_Employee" items="${employees}" z="+/Qjot6wdihkn98pYHoMBPCROjQ=">
+        <table:table data="${employees}" id="l_expenses_domain_Employee" path="/employees" z="1+j3ZW5W7hGzysu89x2zkkGJhBE=">
+            <table:column id="c_expenses_domain_Employee_firstName" property="firstName" z="H76RKlT/WX2vs9LUzmqAtcmXbeo="/>
+            <table:column id="c_expenses_domain_Employee_lastName" property="lastName" z="OtQwzVlGjFLW/s1miWcaiIA1dgw="/>
+            <table:column id="c_expenses_domain_Employee_username" property="username" z="uLVZQeJQrgdGVoRkFOh0OJ9czvs="/>
+            <table:column id="c_expenses_domain_Employee_password" property="password" z="lCkLM4EQpot1HU1QxbMNC1tpcso="/>
+            <table:column id="c_expenses_domain_Employee_supervisor" property="supervisor" z="HVj39ZKQP2cLdop0niVDX5NM/tg="/>
+            <table:column id="c_expenses_domain_Employee_admin" property="admin" z="ekRr951hkFW0qdwFI2WDJfB/bVk="/>
+        </table:table>
+    </page:list>
+</div>

@@ -1,0 +1,25 @@
+<configuration>
+    <contextName>finance</contextName>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d [%thread] %-5level %logger{36} - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <!-- suppress noise from html unit validation -->
+    <logger name="com.gargoylesoftware.htmlunit.DefaultCssErrorHandler" level="ERROR"/>
+    <logger name="com.gargoylesoftware.htmlunit.IncorrectnessListenerImpl" level="ERROR"/>
+    <logger name="com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument" level="ERROR"/>
+    <logger name="com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject" level="ERROR"/>
+    <logger name="com.gargoylesoftware.htmlunit.javascript.StrictErrorReporter" level="OFF"/>
+
+    <root level="DEBUG">
+        <appender-ref ref="STDOUT" />
+    </root>
+
+  <!-- suppress excessive logging when running in eclipse -->
+    <logger name="org.springframework.core.type.classreading.AnnotationAttributesReadingVisitor" level="ERROR"/>
+    <logger name="org.springframework.core.type.classreading.RecursiveAnnotationAttributesVisitor" level="ERROR"/>
+
+</configuration>

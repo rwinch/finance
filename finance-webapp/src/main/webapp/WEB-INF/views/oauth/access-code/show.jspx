@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <h2>Access Code</h2>
+
+    <util:panel id="access-code" title="Access Code" openPane="true">
+          <p>Enter the following access code into your application to grant it access.</p>
+
+          <pre><c:out value="${param.code}"/></pre>
+    </util:panel>
+</div>

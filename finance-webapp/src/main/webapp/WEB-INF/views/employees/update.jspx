@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_expenses_domain_Employee" modelAttribute="employee" path="/employees" versionField="Version" z="bWu3DXde8ZweqHBXgOQNjugsaUI=">
+        <field:input field="firstName" id="c_expenses_domain_Employee_firstName" min="3" required="true" z="NEFW34BomEZXbzauh3Dxeb/ltRk="/>
+        <field:input field="lastName" id="c_expenses_domain_Employee_lastName" min="3" required="true" z="YgjtWYjbCcc0mPd+ujSU5JvjzPI="/>
+        <field:input field="username" id="c_expenses_domain_Employee_username" min="3" required="true" z="D7rsIlGgkdOXzacYDP/Sp64Iytk="/>
+        <field:input field="password" id="c_expenses_domain_Employee_password" min="3" required="true" z="ZPn4+GA35ngvksXnL/v+8Umar/Q="/>
+        <field:select field="supervisor" id="c_expenses_domain_Employee_supervisor" itemValue="id" items="${employees}" path="/employees" z="AqKFW0xsJROltjb7kJm33Zlsfe4="/>
+        <field:checkbox field="admin" id="c_expenses_domain_Employee_admin" z="oaVtQJPYSsKmL4SMIVCV448Wzo8="/>
+    </form:update>
+</div>

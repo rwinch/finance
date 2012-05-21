@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_expenses_domain_Expense" title="Direct reports Expenses" items="${expenses}" z="vMPbnW3Z7OLpiPpJX8mxtCWsmHQ=">
+        <table:table data="${expenses}" id="l_expenses_domain_Expense" path="/expenses/direct-reports" z="KQUo0WDQTYDgF/ZWTJkWffRpD4U=" delete="false" create="false">
+            <table:column id="c_expenses_domain_Expense_description" property="description" z="wGQZ5vrnWzGCdjskLFb0J5bZg2E="/>
+            <table:column calendar="true" dateTimePattern="${expense_expensedate_date_format}" id="c_expenses_domain_Expense_expenseDate" property="expenseDate" z="RCjsTbHTn0EjPs/MigdEph4q20g="/>
+            <table:column id="c_expenses_domain_Expense_reporter" property="reporter" z="R4nBYAw3HmVW6F5zw25WUTSiYXQ="/>
+            <table:column id="c_expenses_domain_Expense_ammount" property="ammount" z="R4nBYAw3HmVW6F5zw25WUTSiYXQ="/>
+            <table:column id="c_expenses_domain_Expense_approved" property="approved" z="BTZaEkCQZkKJyCbtVU5XWpjmzFM="/>
+        </table:table>
+    </page:list>
+</div>

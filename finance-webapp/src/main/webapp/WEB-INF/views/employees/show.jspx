@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_expenses_domain_Employee" object="${employee}" path="/employees" z="W1hheX0fWc4sTAhZY3XyG6CvHq0=">
+        <field:display field="firstName" id="s_expenses_domain_Employee_firstName" object="${employee}" z="HF1DuIz0Wb61R/BgEE8fpTwpooY="/>
+        <field:display field="lastName" id="s_expenses_domain_Employee_lastName" object="${employee}" z="kcLdk+h9o5slI+w+1UdA1vX5qjY="/>
+        <field:display field="username" id="s_expenses_domain_Employee_username" object="${employee}" z="7OyMYKQphkuRFF+/brrng6LyFP8="/>
+        <field:display field="password" id="s_expenses_domain_Employee_password" object="${employee}" z="JR93PDy6FWo+VXklDOc48RS3WWA="/>
+        <field:display field="supervisor" id="s_expenses_domain_Employee_supervisor" object="${employee}" z="kqRTDP4k5tL/8urLHgd77EjxvXQ="/>
+        <field:display field="admin" id="s_expenses_domain_Employee_admin" object="${employee}" z="piuZ7L+Iykt8FzjWFAmbeN7NyC8="/>
+    </page:show>
+</div>

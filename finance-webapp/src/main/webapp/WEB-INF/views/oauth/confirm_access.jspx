@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <h2>Please Confirm</h2>
+
+      <c:url value="/oauth/authorize" var="actionUrl"/>
+      <c:set var="id" value="confirm-access"/>
+      <util:panel id="${id}" title="Confirm Access" openPane="true">
+          <p>You hereby authorize "<c:out value="${client_id}"/>" to access your protected resources.</p>
+
+          <div class="submit">
+              <form id="confirmationForm" class="horizontal" name="confirmationForm" action="${actionUrl}" method="post">
+                <input name="user_oauth_approval" value="true" type="hidden"/>
+                <input name="authorize" value="Authorize" type="submit"/>
+              </form>
+              <form id="denialForm" class="horizontal" name="denialForm" action="${actionUrl}" method="post">
+                <input name="user_oauth_approval" value="false" type="hidden"/>
+                <input name="deny" value="Deny" type="submit"/>
+              </form>
+          </div>
+    </util:panel>
+</div>
