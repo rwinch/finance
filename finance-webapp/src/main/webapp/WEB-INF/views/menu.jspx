@@ -8,7 +8,7 @@
 			<menu:item id="i_expense_list" messageCode="global_menu_list_direct-reports" url="/expenses/direct-reports"
 				z="ICSN6RinlZ/A7e9lF0jTG3B66lE=" />
 			<menu:item id="i_expense_list_my" messageCode="global_menu_list_my" url="/expenses/my" z="user-managed" />
-			<!-- <menu:item id="i_expense_logout" label="Logout" url="/j_spring_security_logout" z="user-managed" /> -->
+			<menu:item id="i_expense_logout" label="Logout" url="/j_spring_security_logout" z="user-managed" />
 		</menu:category>
 	</menu:menu>
 </div>
