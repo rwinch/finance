@@ -15,7 +15,7 @@
     <param-name>contextConfigLocation</param-name>
     <param-value>
       classpath*:META-INF/spring/applicationContext*.xml
-      classpath:META-INF/spring/dataSource.xml
+      classpath:META-INF/spring/dataSource-multi.xml
       classpath:META-INF/spring/security.xml
       classpath:META-INF/spring/security-expressionhandler.xml
     </param-value>

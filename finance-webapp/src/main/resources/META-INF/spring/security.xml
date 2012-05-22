@@ -17,12 +17,14 @@
 				access="permitAll"/>
 
 		<intercept-url pattern="/expenses/direct-reports*/**"
-				access="hasRole('ROLE_SUPERVISOR')"/>
+				access="hasRole('ROLE_SUPERVISOR') and tenantAllowed"/>
 		<intercept-url pattern="/**"
-				access="hasRole('ROLE_USER')"/>
+				access="hasRole('ROLE_USER') and tenantAllowed"/>
 
 		<form-login login-page="/login"
 			authentication-failure-url="/login?error"/>
+			
+		<expression-handler ref="tenantWebExpressionHandler"/>
 	</http>
 	<authentication-manager>
 		<authentication-provider ref="expensesAuthenticationProvider"/>
