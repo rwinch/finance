@@ -13,40 +13,39 @@ import expenses.domain.TenantAware;
 
 @Component
 public class TenantWebExpressionHandler extends AbstractSecurityExpressionHandler<FilterInvocation> {
-    private final TenantContext tenantContext;
+	private final TenantContext tenantContext;
 
-    @Autowired
-    public TenantWebExpressionHandler(TenantContext tenantContext) {
-        this.tenantContext = tenantContext;
-    }
+	@Autowired
+	public TenantWebExpressionHandler(TenantContext tenantContext) {
+		this.tenantContext = tenantContext;
+	}
 
-    @Override
-    protected SecurityExpressionRoot createSecurityExpressionRoot(Authentication authentication,
-            FilterInvocation invocation) {
-        String currentTenant = tenantContext.getTenantId();
-        TenantWebSecurityExpressionRoot result = new TenantWebSecurityExpressionRoot(authentication, invocation, currentTenant);
-        result.setPermissionEvaluator(getPermissionEvaluator());
-        return result;
-    }
+	@Override
+	protected SecurityExpressionRoot createSecurityExpressionRoot(Authentication authentication,
+			FilterInvocation invocation) {
+		String currentTenant = tenantContext.getTenantId();
+		TenantWebSecurityExpressionRoot result = new TenantWebSecurityExpressionRoot(authentication, invocation,
+				currentTenant);
+		result.setPermissionEvaluator(getPermissionEvaluator());
+		return result;
+	}
 
-    private static class TenantWebSecurityExpressionRoot extends WebSecurityExpressionRoot {
-        private final String currentTenantId;
+	private static class TenantWebSecurityExpressionRoot extends WebSecurityExpressionRoot {
+		private final String currentTenantId;
 
-        public TenantWebSecurityExpressionRoot(Authentication a, FilterInvocation fi, String currentTenantId) {
-            super(a, fi);
-            this.currentTenantId = currentTenantId;
-        }
+		public TenantWebSecurityExpressionRoot(Authentication a, FilterInvocation fi, String currentTenantId) {
+			super(a, fi);
+			this.currentTenantId = currentTenantId;
+		}
 
-        @SuppressWarnings("unused")
-        public boolean isTenantAllowed() {
-            Object principal = getPrincipal();
-            return true;
-//            TenantAware tenantAware = (TenantAware) getPrincipal();
-//            String usersTenantId = tenantAware.getTenantId();
-//            if(usersTenantId == null) {
-//                return currentTenantId == null;
-//            }
-//            return usersTenantId.equals(currentTenantId);
-        }
-    }
+		@SuppressWarnings("unused")
+		public boolean isTenantAllowed() {
+			TenantAware tenantAware = (TenantAware) getPrincipal();
+			String usersTenantId = tenantAware.getTenantId();
+			if (usersTenantId == null) {
+				return currentTenantId == null;
+			}
+			return usersTenantId.equals(currentTenantId);
+		}
+	}
 }

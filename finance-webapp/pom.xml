@@ -332,6 +332,11 @@
             <version>${spring.security.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.security.oauth</groupId>
             <artifactId>spring-security-oauth2</artifactId>
             <version>1.0.0.M6b</version>
@@ -405,6 +410,12 @@
                             <artifactId>spring-aspects</artifactId>
                         </aspectLibrary>
                     </aspectLibraries>
+                    <weaveDependencies>
+                      <weaveDependency>
+                        <groupId>org.springframework.security</groupId>
+                        <artifactId>spring-security-core</artifactId>
+                      </weaveDependency>
+                    </weaveDependencies>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
                 </configuration>

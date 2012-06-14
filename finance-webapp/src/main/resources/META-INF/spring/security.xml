@@ -1,43 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <b:beans xmlns:b="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns="http://www.springframework.org/schema/security"
-    xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd
-    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <global-method-security pre-post-annotations="enabled">
-        <expression-handler ref="methodExpressionHandler"/>
-    </global-method-security>
-    <http security="none" pattern="/resources/**"/>
-    <http auto-config="true"
-            use-expressions="true">
-        <intercept-url pattern="/expenses/direct-reports*/**"
-                access="hasRole('ROLE_SUPERVISOR')"/>
-        <intercept-url pattern="/**"
-                access="hasAnyRole('ROLE_USER','ROLE_CLIENT')"/>
+	<http security="none" pattern="/resources/**"/>
+	<http auto-config="true"
+			use-expressions="true">
+		<intercept-url pattern="/expenses/direct-reports*/**"
+				access="hasRole('ROLE_SUPERVISOR')"/>
+		<intercept-url pattern="/**"
+				access="hasRole('ROLE_USER')"/>
+	</http>
+	<authentication-manager>
+		<authentication-provider>
+			<user-service>
+				<user name="eve"
+					password="password"
+					authorities="ROLE_USER"/>
+				<user name="sally"
+					password="password"
+					authorities="ROLE_USER,ROLE_SUPERVISOR"/>
+			</user-service>
+		</authentication-provider>
+	</authentication-manager>
 
-        <custom-filter ref="resourceServerFilter" before="PRE_AUTH_FILTER" />
-        <expression-handler ref="oauthWebExpressionHandler"/>
-    </http>
-    <authentication-manager>
-        <authentication-provider user-service-ref="clientDetailsUserService"/>
-        <authentication-provider ref="expensesAuthenticationProvider"/>
-        <!-- <authentication-provider>
-            <user-service>
-                <user name="eve"
-                    password="password"
-                    authorities="ROLE_USER"/>
-                <user name="aaron"
-                    password="password"
-                    authorities="ROLE_USER"/>
-                <user name="sally"
-                    password="password"
-                    authorities="ROLE_USER,ROLE_SUPERVISOR"/>
-                <user name="adam"
-                    password="password"
-                    authorities="ROLE_SUPERVISOR,ROLE_ADMIN,ROLE_USER"/>
-            </user-service>
-        </authentication-provider> -->
 
-    </authentication-manager>
+
+
+
+<!--<intercept-url pattern="/login"
+				access="permitAll"/>
+	<authentication-provider ref="expensesAuthenticationProvider"/>
+	<global-method-security pre-post-annotations="enabled">
+		<expression-handler ref="methodExpressionHandler"/>
+	</global-method-security>
+	<expression-handler ref="tenantWebExpressionHandler"/>
+	<authentication-provider user-service-ref="clientDetailsUserService"/>
+	<custom-filter ref="resourceServerFilter" before="PRE_AUTH_FILTER" />
+	<intercept-url pattern="/oauth*/**"
+				access="hasAnyRole('ROLE_CLIENT','ROLE_USER') and tenantAllowed"/>
+ -->
 </b:beans>

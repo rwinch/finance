@@ -9,6 +9,10 @@
     <put-attribute name="body" value="/WEB-INF/views/index.jspx" />
   </definition>
 
+	<definition name="login" extends="public">
+		<put-attribute name="body" value="/WEB-INF/views/login.jspx" />
+	</definition>
+
   <definition name="dataAccessFailure" extends="public">
     <put-attribute name="body" value="/WEB-INF/views/dataAccessFailure.jspx" />
   </definition>

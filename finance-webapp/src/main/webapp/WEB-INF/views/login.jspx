@@ -1,0 +1,31 @@
+<div xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util"  xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+	<spring:message var="app_name" code="application_name" htmlEscape="false" />
+	<spring:message var="title" code="welcome_titlepane" arguments="${app_name}" htmlEscape="false" />
+	<util:panel id="title" title="${title}">
+		<h3>
+			Login
+		</h3>
+		<c:if test="${param.error != null}">
+			<font color="red">
+				Your login attempt was not successful, try again.<br/><br/>
+				Reason: <c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}"/>.
+			</font>
+		</c:if>
+		<spring:url value="/j_spring_security_check" var="actionUrl"/>
+		<form action="${actionUrl}" method="post">
+			<p>
+				<label for="username">Username</label>
+				<input type="text" id="username" name="j_username"/>
+			</p>
+			<p>
+				<label for="password">Password</label>
+				<input type="password" id="password" name="j_password"/>
+			</p>
+			<p>
+				<input type="submit" value="Login"/>
+			</p>
+		</form>
+	</util:panel>
+</div>

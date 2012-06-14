@@ -10,6 +10,6 @@
     </bean>
     <jdbc:initialize-database>
         <jdbc:script location="classpath:/db/schema.sql"/>
-        <jdbc:script location="classpath:/db/init.sql"/>
+        <jdbc:script location="classpath:/db/data.sql"/>
     </jdbc:initialize-database>
 </beans>

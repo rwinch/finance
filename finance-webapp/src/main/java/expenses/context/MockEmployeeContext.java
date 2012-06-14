@@ -6,13 +6,13 @@ import org.springframework.stereotype.Component;
 import expenses.domain.Employee;
 import expenses.repository.EmployeeRepository;
 
-//@Component
+@Component
 public class MockEmployeeContext implements EmployeeContext {
-    @Autowired
-    private EmployeeRepository employeeRepository;
+	@Autowired
+	private EmployeeRepository employeeRepository;
 
-    @Override
-    public Employee getCurrent() {
-        return employeeRepository.findOne(110L);
-    }
+	@Override
+	public Employee getCurrent() {
+		return employeeRepository.findOne(100L);
+	}
 }

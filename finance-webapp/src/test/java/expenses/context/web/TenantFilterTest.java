@@ -9,21 +9,22 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import expenses.context.web.TenantFilter;
 
 public class TenantFilterTest {
-    private MockHttpServletRequest request;
-    private TenantFilter tenantFilter;
+	private MockHttpServletRequest request;
 
-    @Before
-    public void setup() {
-        request = new MockHttpServletRequest();
-        tenantFilter = new TenantFilter();
-    }
+	private TenantFilter tenantFilter;
 
-    @Test
-    public void expenses() {
-        request.setServletPath("/expenses");
-        assertThat(tenantFilter.ignoreMatcher.matches(request)).isTrue();
-        request.setServletPath("/expenses/");
-        assertThat(tenantFilter.ignoreMatcher.matches(request)).isTrue();
-    }
+	@Before
+	public void setup() {
+		request = new MockHttpServletRequest();
+		tenantFilter = new TenantFilter();
+	}
+
+	@Test
+	public void expenses() {
+		request.setServletPath("/expenses");
+		assertThat(tenantFilter.ignoreMatcher.matches(request)).isTrue();
+		request.setServletPath("/expenses/");
+		assertThat(tenantFilter.ignoreMatcher.matches(request)).isTrue();
+	}
 
 }

@@ -2,19 +2,19 @@
 <application xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.zeroturnaround.com" xsi:schemaLocation="http://www.zeroturnaround.com http://www.zeroturnaround.com/alderaan/rebel-2_0.xsd">
 
 	<classpath>
-		<dir name="/home/rw012795/git/finance/target/classes">
+		<dir name="/home/rw012795/git/finance/finance-webapp/target/classes">
 		</dir>
-		<dir name="/home/rw012795/git/finance/target/test-classes">
+		<dir name="/home/rw012795/git/finance/finance-webapp/target/test-classes">
 		</dir>
 	</classpath>
 
 	<web>
 		<link target="/">
-			<dir name="/home/rw012795/git/finance/target/m2e-wtp/web-resources">
+			<dir name="/home/rw012795/git/finance/finance-webapp/target/m2e-wtp/web-resources">
 			</dir>
 		</link>
 		<link target="/">
-			<dir name="/home/rw012795/git/finance/src/main/webapp">
+			<dir name="/home/rw012795/git/finance/finance-webapp/src/main/webapp">
 			</dir>
 		</link>
 	</web>

@@ -1,34 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <b:beans xmlns:b="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns="http://www.springframework.org/schema/security/oauth2"
-    xsi:schemaLocation="http://www.springframework.org/schema/security/oauth2 http://www.springframework.org/schema/security/spring-security-oauth2.xsd
-    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/security/oauth2"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/security/oauth2 http://www.springframework.org/schema/security/spring-security-oauth2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
-    <expression-handler id="oauthExpressionHandler" />
+	<expression-handler 
+		id="oauthExpressionHandler" />
 
-    <web-expression-handler id="oauthWebExpressionHandler" />
+	<web-expression-handler
+		id="oauthWebExpressionHandler" />
 
-    <resource-server id="resourceServerFilter"
-        resource-id="sparklr" token-services-ref="tokenServices" />
+	<resource-server id="resourceServerFilter"
+			resource-id="expenses"
+			token-services-ref="tokenServices" />
 
-    <client-details-service id="clientDetails">
-        <client client-id="mobile-finance"
-            authorized-grant-types="password,authorization_code,refresh_token,implicit"
-            secret="password"
-            authorities="ROLE_CLIENT"
-            scope="supervisor,user" />
-    </client-details-service>
-    <b:bean id="clientDetailsUserService" class="org.springframework.security.oauth2.provider.client.ClientDetailsUserDetailsService">
-        <b:constructor-arg ref="clientDetails" />
-    </b:bean>
+	<!-- <client-details-service id="clientDetails">
+	<client client-id="mobile-finance"
+			authorized-grant-types="password,authorization_code,refresh_token,implicit"
+			secret="password"
+			authorities="ROLE_CLIENT"
+			scope="supervisor,user" />
+	</client-details-service> -->
+	<b:bean id="clientDetails"
+		class="org.springframework.security.oauth2.provider.JdbcClientDetailsService"
+		c:dataSource-ref="dataSource"/>
 
-    <b:bean id="tokenStore" class="org.springframework.security.oauth2.provider.token.InMemoryTokenStore" />
+	<b:bean id="clientDetailsUserService"
+		class="org.springframework.security.oauth2.provider.client.ClientDetailsUserDetailsService"
+		c:clientDetailsService-ref="clientDetails" />
 
-    <b:bean id="tokenServices" class="org.springframework.security.oauth2.provider.token.DefaultTokenServices">
-        <b:property name="tokenStore" ref="tokenStore" />
-        <b:property name="supportRefreshToken" value="true" />
-    </b:bean>
-    <b:bean id="userApprovalHandler" class="org.springframework.security.oauth2.provider.approval.DefaultUserApprovalHandler"/>
+	<!-- <b:bean id="tokenStore" 
+		class="org.springframework.security.oauth2.provider.token.InMemoryTokenStore" /> -->
+
+	<b:bean id="tokenStore"
+		class="org.springframework.security.oauth2.provider.token.JdbcTokenStore"
+		c:dataSource-ref="dataSource" />
+
+	<b:bean id="tokenServices"
+		class="org.springframework.security.oauth2.provider.token.DefaultTokenServices"
+		p:tokenStore-ref="tokenStore"
+		p:supportRefreshToken="true" />
+		
+	<b:bean id="userApprovalHandler"
+		class="org.springframework.security.oauth2.provider.approval.DefaultUserApprovalHandler"/>
 </b:beans>

@@ -8,6 +8,7 @@ import expenses.domain.Employee;
 
 @RooJpaRepository(domainType = Employee.class)
 public interface EmployeeRepository {
-    List<Employee> findBySupervisor(Employee employee);
-    Employee findOneByUsername(String username);
+	List<Employee> findBySupervisor(Employee employee);
+
+	Employee findOneByUsername(String username);
 }

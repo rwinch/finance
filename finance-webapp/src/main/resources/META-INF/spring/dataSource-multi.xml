@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+  <bean id="dataSource" class="expenses.context.TenantRoutingDataSource">
+    <property name="targetDataSources">
+      <map>
+        <entry key="springsource.com"
+          value-ref="springsource.comDataSource"/>
+        <entry key="qconferences.com" 
+          value-ref="qconferences.comDataSource"/>
+      </map>
+    </property>
+    <property name="defaultTargetDataSource"
+      ref="defaultDataSource"/>
+  </bean>
+
+  <bean id="defaultDataSource" 
+    parent="baseDataSource"
+    p:url="${database.url}"/>
+
+  <bean id="springsource.comDataSource"
+    parent="baseDataSource"
+    p:url='${database.url};INIT=CREATE SCHEMA IF NOT EXISTS "SPRINGSOURCE.COM"\;SET SCHEMA "SPRINGSOURCE.COM"'/>
+  <bean id="qconferences.comDataSource"
+    parent="baseDataSource"
+    p:url='${database.url};INIT=CREATE SCHEMA IF NOT EXISTS "QCONFERENCES.COM"\;SET SCHEMA "QCONFERENCES.COM"'/>
+
+  <jdbc:initialize-database data-source="defaultDataSource">
+    <jdbc:script location="classpath:/db/schema.sql"/>
+    <jdbc:script location="classpath:/db/oauth-schema.sql"/>
+  </jdbc:initialize-database>
+  <jdbc:initialize-database data-source="springsource.comDataSource">
+    <jdbc:script location="classpath:/db/schema.sql"/>
+    <jdbc:script location="classpath:/db/data-springsource.sql"/>
+    <jdbc:script location="classpath:/db/oauth-schema.sql"/>
+    <jdbc:script location="classpath:/db/oauth-data-springsource.sql"/>
+  </jdbc:initialize-database>
+  <jdbc:initialize-database data-source="qconferences.comDataSource">
+    <jdbc:script location="classpath:/db/schema.sql"/>
+    <jdbc:script location="classpath:/db/data-qconferences.sql"/>
+    <jdbc:script location="classpath:/db/oauth-schema.sql"/>
+    <jdbc:script location="classpath:/db/oauth-data-qconferences.sql"/>
+  </jdbc:initialize-database>
+</beans>

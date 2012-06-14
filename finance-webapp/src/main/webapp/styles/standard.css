@@ -375,3 +375,11 @@ fieldset th {
 .horizontal {
     display: inline;
 }
+
+.welcome {
+  font-weight: bold;
+  font-size: 1.2em;
+  color: #648C1D;
+  padding-bottom: .25em;
+  text-align: right;
+}

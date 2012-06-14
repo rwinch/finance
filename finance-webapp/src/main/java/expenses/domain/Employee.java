@@ -17,31 +17,31 @@ import org.springframework.roo.addon.tostring.RooToString;
 @RooJpaEntity
 public class Employee implements Serializable {
 
-    @NotNull
-    @Size(min = 3)
-    private String firstName;
+	@NotNull
+	@Size(min = 3)
+	private String firstName;
 
-    @NotNull
-    @Size(min = 3)
-    private String lastName;
+	@NotNull
+	@Size(min = 3)
+	private String lastName;
 
-    @NotNull
-    @Column(unique = true)
-    @Size(min = 3)
-    private String username;
+	@NotNull
+	@Column(unique = true)
+	@Size(min = 3)
+	private String username;
 
-    @NotNull
-    @Size(min = 3)
-    @JsonIgnore
-    private String password;
+	@NotNull
+	@Size(min = 3)
+	@JsonIgnore
+	private String password;
 
-    @ManyToOne
-    private expenses.domain.Employee supervisor;
+	@ManyToOne
+	private expenses.domain.Employee supervisor;
 
-    @JsonIgnore
-    public boolean isSupervisor() {
-        return supervisor == null;
-    }
+	@JsonIgnore
+	public boolean isSupervisor() {
+		return supervisor == null;
+	}
 
-    private static final long serialVersionUID = -7243832286546823896L;
+	private static final long serialVersionUID = -7243832286546823896L;
 }

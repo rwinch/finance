@@ -1,0 +1,2 @@
+insert into oauth_client_details (client_id,client_secret,scope,authorized_grant_types,authorities) values (
+  'qconferences-finance','password','supervisor,user','password,authorization_code,refresh_token,implicit','ROLE_CLIENT');

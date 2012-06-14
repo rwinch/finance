@@ -20,22 +20,22 @@ import org.springframework.roo.addon.tostring.RooToString;
 @RooJpaEntity
 public class Expense {
 
-    @NotNull
-    @Size(min = 3)
-    private String description;
+	@NotNull
+	@Size(min = 3)
+	private String description;
 
-    @NotNull
-    @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(pattern="yyyy-MM-dd")
-    private Calendar expenseDate;
+	@NotNull
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Calendar expenseDate;
 
-    @Min(0L)
-    @NotNull
-    @Digits(integer=Integer.MAX_VALUE,fraction=2)
-    private Double ammount;
+	@Min(0L)
+	@NotNull
+	@Digits(integer = Integer.MAX_VALUE, fraction = 2)
+	private Double ammount;
 
-    @ManyToOne
-    private Employee reporter;
+	@ManyToOne
+	private Employee reporter;
 
-    private Boolean approved;
+	private Boolean approved;
 }

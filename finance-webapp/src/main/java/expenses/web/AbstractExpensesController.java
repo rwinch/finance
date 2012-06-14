@@ -13,23 +13,24 @@ import expenses.repository.ExpenseRepository;
 
 @Controller
 abstract class AbstractExpensesController {
-    @Autowired
-    protected ExpenseRepository expenseRepository;
+	@Autowired
+	protected ExpenseRepository expenseRepository;
 
-    @Autowired
-    protected EmployeeRepository employeeRepository;
+	@Autowired
+	protected EmployeeRepository employeeRepository;
 
-    @Autowired
-    protected EmployeeContext employeeContext;
+	@Autowired
+	protected EmployeeContext employeeContext;
 
-    void addDateTimeFormatPatterns(Model uiModel) {
-        uiModel.addAttribute("expense_expensedate_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
-    }
+	void addDateTimeFormatPatterns(Model uiModel) {
+		uiModel.addAttribute("expense_expensedate_date_format",
+				DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
+	}
 
-    void populateEditForm(Model uiModel, Object expense) {
-        uiModel.addAttribute("expense", expense);
-        addDateTimeFormatPatterns(uiModel);
-        Employee currentUser = employeeContext.getCurrent();
-        uiModel.addAttribute("employees", employeeRepository.findBySupervisor(currentUser));
-    }
+	void populateEditForm(Model uiModel, Object expense) {
+		uiModel.addAttribute("expense", expense);
+		addDateTimeFormatPatterns(uiModel);
+		Employee currentUser = employeeContext.getCurrent();
+		uiModel.addAttribute("employees", employeeRepository.findBySupervisor(currentUser));
+	}
 }

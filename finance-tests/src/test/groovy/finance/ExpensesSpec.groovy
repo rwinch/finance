@@ -24,18 +24,18 @@ class ExpensesSpec extends Specification {
     RESTClient client
 
     def setupSpec() {
-        client = new RESTClient('http://localhost:8080/finance/')
+        client = new RESTClient('http://localhost:8080/finance/springsource.com/')
         client.setContentType JSON
         client.client.addRequestInterceptor(new HttpRequestInterceptor() {
             void process(HttpRequest httpRequest, HttpContext httpContext) {
-                httpRequest.addHeader('Authorization', 'Basic ' + "mobile-finance:password".toString().bytes.encodeBase64().toString())
+                httpRequest.addHeader('Authorization', 'Basic ' + "springsource-finance:password".toString().bytes.encodeBase64().toString())
             }
         })
     }
 
     def 'direct reports'() {
         setup:
-        def resp = client.post(path: 'oauth/token', body : [username: 'sally', password: 'password', grant_type : 'password', scope:'supervisor'], requestContentType : URLENC)
+        def resp = client.post(path: 'oauth/token', body : [username: 'spring', password: 'password', grant_type : 'password', scope:'supervisor'], requestContentType : URLENC)
         def data = resp.data
         when:
         resp = client.get(path: "expenses/direct-reports",query:["access_token": data.access_token])

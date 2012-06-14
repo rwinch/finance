@@ -20,7 +20,7 @@ import expenses.context.TenantContext;
  * Obtains the tenant id as the first path after the context root and contains a / after it. If the tenant is found, it
  * will then replace the {@link HttpServletRequest} with {@link TenantAwareHttpServletRequest}. A few examples where
  * /context is always the context root:
- *
+ * 
  * <ul>
  * <li>/context/ - null tenant</li>
  * <li>/context/a - null tenant because there is no trailing slash afterwards. This allows for URL's with no tenant that
@@ -28,102 +28,103 @@ import expenses.context.TenantContext;
  * <li>/context/a/ - tenant id of a</li>
  * <li>/context/tenant/b/c/def.png - tenant id of tenant</li>
  * </ul>
- *
- *
+ * 
+ * 
  * @author Rob Winch
- *
+ * 
  */
 @Component
 public class TenantFilter extends OncePerRequestFilter implements TenantContext {
-    private static ThreadLocal<String> TENANT_ID = new ThreadLocal<String>();
-    RequestMatcher ignoreMatcher = new RegexRequestMatcher("^/(admin|oauth|employee|expenses|resources).*", null);
+	private static ThreadLocal<String> TENANT_ID = new ThreadLocal<String>();
 
-    @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-            throws ServletException, IOException {
-        if(ignoreMatcher.matches(request)) {
-            filterChain.doFilter(request, response);
-            return;
-        }
-        String tenantId = getTenantId(request);
-        if(tenantId == null) {
-            filterChain.doFilter(request, response);
-            return;
-        }
-        try {
-            TENANT_ID.set(tenantId);
-            filterChain.doFilter(new TenantAwareHttpServletRequest(request, tenantId), response);
-        } finally {
-            TENANT_ID.remove();
-        }
-    }
+	RequestMatcher ignoreMatcher = new RegexRequestMatcher("^/(admin|oauth|employee|expenses|resources).*", null);
 
-    public String getTenantId() {
-        return TENANT_ID.get();
-    }
+	@Override
+	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+			throws ServletException, IOException {
+		if (ignoreMatcher.matches(request)) {
+			filterChain.doFilter(request, response);
+			return;
+		}
+		String tenantId = getTenantId(request);
+		if (tenantId == null) {
+			filterChain.doFilter(request, response);
+			return;
+		}
+		try {
+			TENANT_ID.set(tenantId);
+			filterChain.doFilter(new TenantAwareHttpServletRequest(request, tenantId), response);
+		}
+		finally {
+			TENANT_ID.remove();
+		}
+	}
 
-    private String getTenantId(HttpServletRequest request) {
-        String tenantId = getTenantId();
-        if(tenantId != null) {
-            return tenantId;
-        }
+	public String getTenantId() {
+		return TENANT_ID.get();
+	}
 
-        String requestUrl = currentUrl(request);
+	private String getTenantId(HttpServletRequest request) {
+		String tenantId = getTenantId();
+		if (tenantId != null) {
+			return tenantId;
+		}
 
-        if("".equals(requestUrl) || "/".equals(requestUrl)) {
-            return null;
-        }
-        StringTokenizer tokens = new StringTokenizer(requestUrl,"/");
-        if(tokens.hasMoreTokens()) {
-            String result = tokens.nextToken();
-            if(tokens.hasMoreTokens() || requestUrl.endsWith("/")) {
-                return result;
-            }
-        }
-        return null;
-    }
+		String requestUrl = currentUrl(request);
 
-    private String currentUrl(HttpServletRequest request) {
-        StringBuilder url = new StringBuilder();
-        url.append(request.getServletPath());
+		if ("".equals(requestUrl) || "/".equals(requestUrl)) {
+			return null;
+		}
+		StringTokenizer tokens = new StringTokenizer(requestUrl, "/");
+		if (tokens.hasMoreTokens()) {
+			String result = tokens.nextToken();
+			if (tokens.hasMoreTokens() || requestUrl.endsWith("/")) {
+				return result;
+			}
+		}
+		return null;
+	}
 
-        String pathInfo = request.getPathInfo();
-        if (pathInfo != null) {
-           url.append(pathInfo);
-        }
-        return url.toString();
-    }
+	private String currentUrl(HttpServletRequest request) {
+		StringBuilder url = new StringBuilder();
+		url.append(request.getServletPath());
 
-    /**
-     * A wrapper for the HttpServletRequest that includes the tenant id in the context path. Note that we do not cache
-     * the servletPath or the contextPath as this can lead to problem with forwarding requests.
-     *
-     * @author Rob Winch
-     *
-     */
-    private static class TenantAwareHttpServletRequest extends HttpServletRequestWrapper {
-        private final String tenantId;
+		String pathInfo = request.getPathInfo();
+		if (pathInfo != null) {
+			url.append(pathInfo);
+		}
+		return url.toString();
+	}
 
-        public TenantAwareHttpServletRequest(HttpServletRequest request, String tenantId) {
-            super(request);
-            this.tenantId = tenantId;
-        }
+	/**
+	 * A wrapper for the HttpServletRequest that includes the tenant id in the context path. Note that we do not cache
+	 * the servletPath or the contextPath as this can lead to problem with forwarding requests.
+	 * 
+	 * @author Rob Winch
+	 * 
+	 */
+	private static class TenantAwareHttpServletRequest extends HttpServletRequestWrapper {
+		private final String tenantId;
 
-        @Override
-        public String getServletPath() {
-            String servletPath = super.getServletPath();
-            int start = servletPath.indexOf(tenantId);
-            if(start < 0) {
-                return servletPath;
-            }
-            int end = start + tenantId.length();
-            return servletPath.substring(end);
-        }
+		public TenantAwareHttpServletRequest(HttpServletRequest request, String tenantId) {
+			super(request);
+			this.tenantId = tenantId;
+		}
 
-        @Override
-        public String getContextPath() {
-            return super.getContextPath()+"/"+tenantId;
-        }
-    }
+		@Override
+		public String getServletPath() {
+			String servletPath = super.getServletPath();
+			int start = servletPath.indexOf(tenantId);
+			if (start < 0) {
+				return servletPath;
+			}
+			int end = start + tenantId.length();
+			return servletPath.substring(end);
+		}
+
+		@Override
+		public String getContextPath() {
+			return super.getContextPath() + "/" + tenantId;
+		}
+	}
 }
-
