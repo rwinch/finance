@@ -8,10 +8,17 @@
 	<http security="none" pattern="/resources/**"/>
 	<http auto-config="true"
 			use-expressions="true">
+
+		<intercept-url pattern="/login" 
+				access="permitAll"/>
+
 		<intercept-url pattern="/expenses/direct-reports*/**"
 				access="hasRole('ROLE_SUPERVISOR')"/>
 		<intercept-url pattern="/**"
 				access="hasRole('ROLE_USER')"/>
+
+		<form-login login-page="/login"
+			authentication-failure-url="/login?error"/>
 	</http>
 	<authentication-manager>
 		<authentication-provider>

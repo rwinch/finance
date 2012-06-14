@@ -15,19 +15,19 @@
 		<title><spring:message code="welcome_h3" arguments="${app_name}" /></title>
 	</head>
 	
-		<body class="tundra spring">
-			<div id="wrapper">
-				<tiles:insertAttribute name="header" ignore="true" />
-				<!-- <sec:authorize access="authenticated">
-					<div class="welcome">
-						Welcome <sec:authentication property="principal.username"/>
-					</div>
-				</sec:authorize> -->
-				<tiles:insertAttribute name="menu" ignore="true" />   
-				<div id="main">
-					<tiles:insertAttribute name="body"/> 
-					<tiles:insertAttribute name="footer" ignore="true"/>
+	<body class="tundra spring">
+		<div id="wrapper">
+			<tiles:insertAttribute name="header" ignore="true" />
+			<sec:authorize access="authenticated">
+				<div class="welcome">
+					Welcome <sec:authentication property="principal.username"/>
 				</div>
+			</sec:authorize>
+			<tiles:insertAttribute name="menu" ignore="true" />   
+			<div id="main">
+				<tiles:insertAttribute name="body"/> 
+				<tiles:insertAttribute name="footer" ignore="true"/>
+			</div>
 		</div>
 	</body>
 </html>
