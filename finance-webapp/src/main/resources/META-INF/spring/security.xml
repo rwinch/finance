@@ -15,7 +15,8 @@
 
 		<intercept-url pattern="/login" 
 				access="permitAll"/>
-
+		<intercept-url pattern="/oauth*/**"
+				access="hasAnyRole('ROLE_CLIENT','ROLE_USER') and tenantAllowed"/>
 		<intercept-url pattern="/expenses/direct-reports*/**"
 				access="hasRole('ROLE_SUPERVISOR') and tenantAllowed"/>
 		<intercept-url pattern="/**"
@@ -23,10 +24,14 @@
 
 		<form-login login-page="/login"
 			authentication-failure-url="/login?error"/>
-			
+		
+		<custom-filter 
+			ref="resourceServerFilter" 
+			before="PRE_AUTH_FILTER" />	
 		<expression-handler ref="tenantWebExpressionHandler"/>
 	</http>
 	<authentication-manager>
+		<authentication-provider user-service-ref="clientDetailsUserService"/>
 		<authentication-provider ref="expensesAuthenticationProvider"/>
 	</authentication-manager>
 
