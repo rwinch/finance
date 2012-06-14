@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import expenses.domain.Employee;
 import expenses.repository.EmployeeRepository;
 
-@Component
+//@Component
 public class MockEmployeeContext implements EmployeeContext {
 	@Autowired
 	private EmployeeRepository employeeRepository;

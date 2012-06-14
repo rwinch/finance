@@ -20,14 +20,18 @@
 			<tiles:insertAttribute name="header" ignore="true" />
 			<sec:authorize access="authenticated">
 				<div class="welcome">
-					Welcome <sec:authentication property="principal.username"/>
+					Welcome
+					<sec:authentication 
+						property="principal.lastName"/>, 
+					<sec:authentication 
+						property="principal.firstName"/> 
 				</div>
 			</sec:authorize>
-			<tiles:insertAttribute name="menu" ignore="true" />   
-			<div id="main">
-				<tiles:insertAttribute name="body"/> 
-				<tiles:insertAttribute name="footer" ignore="true"/>
-			</div>
+		    <tiles:insertAttribute name="menu" ignore="true" />   
+		    <div id="main">
+	    		<tiles:insertAttribute name="body"/> 
+		    	<tiles:insertAttribute name="footer" ignore="true"/>
+		    </div>
 		</div>
 	</body>
 </html>

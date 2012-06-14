@@ -21,16 +21,7 @@
 			authentication-failure-url="/login?error"/>
 	</http>
 	<authentication-manager>
-		<authentication-provider>
-			<user-service>
-				<user name="eve"
-					password="password"
-					authorities="ROLE_USER"/>
-				<user name="sally"
-					password="password"
-					authorities="ROLE_USER,ROLE_SUPERVISOR"/>
-			</user-service>
-		</authentication-provider>
+		<authentication-provider ref="expensesAuthenticationProvider"/>
 	</authentication-manager>
 
 
